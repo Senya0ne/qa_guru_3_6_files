@@ -1,8 +1,3 @@
-# from zip_packer import zip_packer
-
-# zip_packer()
-
-
 def test_namelist_files(get_list_filenames):
     expected_filenames = ['addresses.csv', 'file_example_XLSX_10.xlsx', 'sample.pdf']
     assert len(expected_filenames) == len(get_list_filenames)

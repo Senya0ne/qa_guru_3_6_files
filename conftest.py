@@ -13,6 +13,7 @@ path_zip_arch = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resour
 
 @pytest.fixture(scope='session', autouse=True)
 def zip_packer():
+    """Фикстура для запаковки файлов и удаления файлов после тестов"""
     files_dir = pathlib.Path("resources/")
     current_dir = pathlib.Path("")
     with zipfile.ZipFile("files.zip", mode="w") as archive:
