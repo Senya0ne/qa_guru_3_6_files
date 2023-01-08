@@ -8,14 +8,16 @@ import PyPDF2
 
 import pytest
 
+import tests
+
 path_zip_arch = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources/files.zip')
 
 
 @pytest.fixture(scope='session', autouse=True)
 def zip_packer():
     """Фикстура для запаковки файлов и удаления файлов после тестов"""
-    files_dir = pathlib.Path("resources/")
-    current_dir = pathlib.Path("")
+    files_dir = pathlib.Path(tests.__file__).parent.parent.joinpath('resources').absolute()
+    current_dir = pathlib.Path.cwd()
     with zipfile.ZipFile("files.zip", mode="w") as archive:
         for file_path in files_dir.iterdir():
             archive.write(file_path, arcname=file_path.name)
