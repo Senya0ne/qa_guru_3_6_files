@@ -16,8 +16,8 @@ path_zip_arch = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resour
 @pytest.fixture(scope='session', autouse=True)
 def zip_packer():
     """Фикстура для запаковки файлов и удаления файлов после тестов"""
-    # files_dir = pathlib.Path(tests.__file__).parent.parent.joinpath('resources').absolute()
-    files_dir = pathlib.Path(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources'))
+    files_dir = pathlib.Path(tests.__file__).parent.parent.joinpath('resources').absolute()
+    # files_dir = pathlib.Path(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources'))
     current_dir = pathlib.Path.cwd()
     with zipfile.ZipFile("files.zip", mode="w") as archive:
         for file_path in files_dir.iterdir():
@@ -47,7 +47,7 @@ def get_csv_addresses():
 def get_pdf_reader():
     """Фикстура для получения pdf reader с файлом addresses.csv"""
     with zipfile.ZipFile(f"{path_zip_arch}", mode="r") as archive:
-        filename = archive.namelist()[2]
+        filename = sorted(archive.namelist())[2]
         print(archive.namelist())
         pdf_file = PyPDF2.PdfReader(BytesIO(archive.read(filename)))
         return pdf_file
