@@ -21,7 +21,7 @@ def zip_packer():
     with zipfile.ZipFile("files.zip", mode="w") as archive:
         for file_path in files_dir.iterdir():
             archive.write(file_path, arcname=file_path.name)
-        pathlib.Path(f'{current_dir}/files.zip').rename(f'{files_dir}/files.zip')
+    pathlib.Path(f'{current_dir}/files.zip').rename(f'{files_dir}/files.zip')
     yield
     pathlib.Path(f'{files_dir}/files.zip').unlink()
 
