@@ -48,6 +48,7 @@ def get_pdf_reader():
     """Фикстура для получения pdf reader с файлом addresses.csv"""
     with zipfile.ZipFile(f"{path_zip_arch}", mode="r") as archive:
         filename = archive.namelist()[2]
+        print(filename)
         pdf_file = PyPDF2.PdfReader(BytesIO(archive.read(filename)))
         return pdf_file
 
