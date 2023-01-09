@@ -31,7 +31,7 @@ def zip_packer():
 def get_list_filenames():
     """Фикстура для получения списка имен файлов в zip архиве"""
     with zipfile.ZipFile(f"{path_zip_arch}", mode="r") as archive:
-        return archive.namelist()
+        return sorted(archive.namelist())
 
 
 @pytest.fixture
@@ -57,7 +57,7 @@ def get_pdf_reader():
 def get_xlsx_reader():
     """Фикстура для получения xlsx reader с файлом addresses.csv"""
     with zipfile.ZipFile(f"{path_zip_arch}", mode="r") as archive:
-        filename = archive.namelist()[1]
+        filename = sorted(archive.namelist())[1]
         workbook = load_workbook(BytesIO(archive.read(filename)))
         sheet = workbook.active
         return sheet
